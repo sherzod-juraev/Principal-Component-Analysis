@@ -1,4 +1,4 @@
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, field_validator
 from numpy import array, isnan, where, nanmean, take
 from fastapi import HTTPException, status
 
@@ -14,7 +14,7 @@ class PCAIn(BaseModel):
 
     X: list[list]
 
-    @model_validator('X')
+    @field_validator('X')
     def verify_X(cls, value):
         X = array(value)
         if X.ndim != 2:
