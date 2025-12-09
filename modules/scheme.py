@@ -1,5 +1,5 @@
 from pydantic import BaseModel, field_validator
-from numpy import array, isnan, where, nanmean, take
+from numpy import array, isnan, where, nanmean, take, nan
 from fastapi import HTTPException, status
 
 
@@ -16,7 +16,7 @@ class PCAIn(BaseModel):
 
     @field_validator('X')
     def verify_X(cls, value):
-        X = array(value)
+        X = array([[nan if v is None else v for v in row] for row in value])
         if X.ndim != 2:
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,

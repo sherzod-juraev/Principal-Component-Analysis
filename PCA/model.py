@@ -25,7 +25,7 @@ class PCA:
     def fit(self, X: ndarray, /) -> ndarray:
         """Fit training data"""
 
-        Xc, n, d = X - X.mean(axis=0), X.shape
+        Xc, n, d = X - X.mean(axis=0), X.shape[0], X.shape[1]
         Cov = cov(Xc, rowvar=False)
         eignvals, eigenvecs = eigh(Cov)
         idx = eignvals.argsort()[::-1]
