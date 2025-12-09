@@ -19,6 +19,6 @@ async def pca_fit(
 ) -> PCAOut:
     pca.n_components = 2
     pca_scheme = PCAOut(
-        X=pca.fit(pca_scheme.X)
+        X=pca.fit(pca_scheme.X).tolist()
     )
     return pca_scheme
